@@ -7,8 +7,16 @@ print('O servidor esta pronto esperando mensagens')
 while True:
 	connectionSocket, addr = serverSocket.accept()
 	sentence = connectionSocket.recv(1024).decode()
-	print("mensagem recebida: ", sentence)
-	capitalizedSentence = sentence.upper()
+
+	print("Nome: ", sentence)
+	capitalizedSentence = sentence
 	print("mensagem que sera enviada: ", capitalizedSentence)
 	connectionSocket.send(capitalizedSentence.encode())
+
+	print("Nivel: ", sentence)
+	capitalizedSentence = sentence
+	print("mensagem que sera enviada: ", capitalizedSentence)
+	connectionSocket.send(capitalizedSentence.encode())
+
 	connectionSocket.close()
+
