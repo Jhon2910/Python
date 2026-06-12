@@ -9,6 +9,9 @@ clientSocket.send(nome.encode())
 BoasVindas = clientSocket.recv(1024)
 print ('Olá', BoasVindas.decode())
 
+Nivel = input('Digite sua Nivel: ')
+clientSocket.send(Nivel.encode())
+
 Jogo = input('\nQual jogo gostaria de jogar? ')
 clientSocket.send(Jogo.encode())
 
