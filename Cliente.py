@@ -1,23 +1,9 @@
 from socket import *
 import random
 import time
-import sys
 
 serverName = 'localhost'
 serverPort = 12000
-clientSocket = socket(AF_INET, SOCK_STREAM)
-clientSocket.connect((serverName, serverPort))
-
-def criando_jogo():
-    print("\nCriando jogo", end="", flush=True)
-    for _ in range(3):
-        for pontos in range(1, 4):
-            sys.stdout.write("\r" + "Criando jogo" + "." * pontos + "   ")
-            sys.stdout.flush()
-            time.sleep(0.33)
-    print("\nJogo criado!")
-
-criando_jogo()
 
 listaDeJogos = {
     "Valorant": 4,
@@ -34,44 +20,45 @@ while True:
     nome = input('\nDigite seu nome: ')
     print('Olá', nome)
     clientSocket.send(nome.encode())
-    clientSocket.recv(1024).decode()
+    clientSocket.recv(1024)
 
     nivel = input('Digite seu nivel (1 a 100): ')
     print("Seu nivel é: ", nivel)
     clientSocket.send(nivel.encode())
-    clientSocket.recv(1024).decode()
+    clientSocket.recv(1024)
 
     print("Lista de jogos: ", listaDeJogos)
     Jogo = input('Qual jogo gostaria de jogar? ')
     clientSocket.send(Jogo.encode())
-    clientSocket.recv(1024).decode()
+    clientSocket.recv(1024)  # eco do jogo
 
-    jogadores = int(clientSocket.recv(1024).decode())
+    resposta = clientSocket.recv(1024).decode()  # resposta final do servidor
     clientSocket.close()
 
+    print(resposta)
+
     if Jogo in listaDeJogos:
+        jogadores = int(resposta.split(":")[-1].strip())
         necessarios = listaDeJogos[Jogo] - jogadores
+
         if necessarios > 0:
-            print("\nSao necessarios mais ", necessarios, " para jogar, você foi adicionado a fila de ", Jogo )
+            print("\nSão necessários mais", necessarios, "para jogar, você foi adicionado à fila de", Jogo)
             time.sleep(2)
         else:
-            criando_jogo()
             ID = random.randint(1, 300)
             print("\n------------------------------------------------")
-            print("Quantidade de jogadores alcançada!: ", jogadores)
+            print("Quantidade de jogadores alcançada!:", jogadores)
             print("Partida criada!")
-            print("Jogo:",Jogo)
-            print("ID da partida:",ID)
-            print("Participantes:",jogadores)
+            print("Jogo:", Jogo)
+            print("ID da partida:", ID)
+            print("Participantes:", jogadores)
 
-            continuar = input("Gostaria de continuar configurando os outros jogadores(S/N)?")
+            continuar = input("Gostaria de continuar configurando os outros jogadores (S/N)? ")
             if continuar == "S":
                 print("Continuando!")
                 time.sleep(1)
             elif continuar == "N":
                 break
-
     else:
         print("Jogo não encontrado! Tente novamente.")
         break
-
