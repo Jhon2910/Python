@@ -2,6 +2,7 @@ from socket import *
 
 serverPort = 12000
 serverSocket = socket(AF_INET, SOCK_STREAM)
+serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 serverSocket.bind(('', serverPort))
 serverSocket.listen(1)
 print('O servidor esta pronto esperando mensagens')
@@ -32,23 +33,14 @@ while True:
     if jogo in Fila:
         if nome in Fila[jogo]:
             Fila[jogo].remove(nome)
-        connectionSocket.send("JaNaFila".encode())
+            resposta = f"Removido. Jogadores na fila: {len(Fila[jogo])}"
         else:
             Fila[jogo].append(nome)
-            connectionSocket.send("JaNaFila".encode())
-    elif jogo == "LOL":
-        LOL += 1
-        connectionSocket.send(str(LOL).encode())
-    elif jogo == "CS":
-        CS += 1
-        connectionSocket.send(str(CS).encode())
-    elif jogo == "FIFA":
-        FIFA += 1
-        connectionSocket.send(str(FIFA).encode())
-    elif jogo == "Minecraft":
-        Minecraft += 1
-        connectionSocket.send(str(Minecraft).encode())
+            resposta = f"Adicionado. Jogadores na fila: {len(Fila[jogo])}"
+
+        print(Fila)
+        connectionSocket.send(resposta.encode())
     else:
-        print("Jogo inválido")
+        connectionSocket.send("Jogo inválido".encode())
 
     connectionSocket.close()
