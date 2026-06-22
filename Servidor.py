@@ -42,4 +42,5 @@ while True:
     else:
         connectionSocket.send("Jogo inválido".encode())
 
+
     connectionSocket.close()
