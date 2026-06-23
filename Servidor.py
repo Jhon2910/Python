@@ -7,7 +7,7 @@ serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 serverSocket.bind(('', serverPort))
 serverSocket.listen(1)
 
-print('O servidor esta pronto esperando mensagens')
+print("O servidor esta pronto esperando mensagens")
 
 filas = {
     "Valorant": [],
@@ -40,7 +40,7 @@ while True:
     print("Jogo:", jogo)
 
     if jogo not in filas:
-        resposta = "Jogo" + jogo + "não encontrado na lista de jogos disponíveis."
+        resposta = "Jogo" + jogo + " não encontrado na lista de jogos disponíveis."
         connectionSocket.send(resposta.encode())
         connectionSocket.close()
         continue
@@ -61,7 +61,6 @@ while True:
         print("Jogo:", jogo)
         print("ID da partida:", idPartida)
         print("Participantes:", participantes)
-
 
         resposta = (
             f"Uma nova partida foi criada.\n"
