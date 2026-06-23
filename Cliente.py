@@ -29,6 +29,6 @@ while True:
     print("\nResposta do servidor")
     print(resposta)
 
-    continuar = input('\nDeseja simular outro jogador (S/N)? ')
+    continuar = input('\nDeseja adicionar outro jogador (S/N)? ')
     if continuar.upper() != 'S':
         break
