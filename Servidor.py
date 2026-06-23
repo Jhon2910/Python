@@ -34,16 +34,16 @@ while True:
     nome = connectionSocket.recv(1024).decode()
     print("Nome:", nome)
     connectionSocket.send(b"OK")
-    #Os nomes serão armazenados aqui pelo servidor
+    #Os nomes serão armazenados aqui pelo servidor e enviara um OK
 
     nivel = connectionSocket.recv(1024).decode()
     print("Nível:", nivel)
     connectionSocket.send(b"OK")
-    #Os niveis serão armazenados aqui
+    #Os niveis serão armazenados aqui e enviara um OK
 
     jogo = connectionSocket.recv(1024).decode()
     print("Jogo:", jogo)
-    #Aqui ficara o jogo solicitado
+    #Aqui ficara o jogo solicitado apos o recebimento
 
     if jogo not in filas:#Se os jogos não estiverem na fila...
         resposta = "Jogo" + jogo + " não encontrado na lista de jogos disponíveis."
