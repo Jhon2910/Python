@@ -11,13 +11,13 @@ while True:
 
     nome = input("\nDigite seu nome: ")
     print("Olá,", nome)
-    clientSocket.send(nome.encode())
-    clientSocket.recv(1024)#Envia o nome para o servidor
+    clientSocket.send(nome.encode())#Envia o nome para o servidor
+    clientSocket.recv(1024)
 
     nivel = input("Digite seu nível (1 a 100): ")
     print("Seu nível é:", nivel)
-    clientSocket.send(nivel.encode())
-    clientSocket.recv(1024)#Envia o nivel para o servidor
+    clientSocket.send(nivel.encode())#Envia o nivel para o servidor
+    clientSocket.recv(1024)
 
     print("Jogos disponíveis:", jogosDisponiveis)
     jogo = input("Qual jogo gostaria de jogar? ")
